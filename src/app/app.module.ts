@@ -9,7 +9,10 @@ import { ThreadSectionComponent } from './thread-section/thread-section.componen
 import { MessageSectionComponent } from './message-section/message-section.component';
 import { ThreadListComponent } from './thread-list/thread-list.component';
 import { MessageListComponent } from './message-list/message-list.component';
-import {ThreadsService} from "./services/threads.service";
+import {ThreadsService} from './services/threads.service';
+import {StoreModule} from '@ngrx/store';
+import {INITIAL_APPLICATION_STORE, reducers} from './store/application-sate';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +26,13 @@ import {ThreadsService} from "./services/threads.service";
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    StoreModule.forRoot(reducers,
+      {
+        initialState: {
+          ...INITIAL_APPLICATION_STORE
+        }
+      }),
   ],
   providers: [ThreadsService],
   bootstrap: [AppComponent]
