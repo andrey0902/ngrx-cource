@@ -12,6 +12,10 @@ import { MessageListComponent } from './message-list/message-list.component';
 import {ThreadsService} from './services/threads.service';
 import {StoreModule} from '@ngrx/store';
 import {INITIAL_APPLICATION_STORE, reducers} from './store/application-sate';
+import { EffectsModule } from '@ngrx/effects';
+import { LoadThreadsEffectService } from './store/effects/load-threads-effect.service';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'environments/environment';
 
 
 @NgModule({
@@ -33,6 +37,10 @@ import {INITIAL_APPLICATION_STORE, reducers} from './store/application-sate';
           ...INITIAL_APPLICATION_STORE
         }
       }),
+    EffectsModule.forRoot([LoadThreadsEffectService]),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
   ],
   providers: [ThreadsService],
   bootstrap: [AppComponent]
